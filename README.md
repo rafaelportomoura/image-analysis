@@ -1,32 +1,30 @@
 <!--
-title: 'AWS NodeJS Example'
-description: 'This template demonstrates how to deploy a NodeJS function running on AWS Lambda using the traditional Serverless Framework.'
+title: 'Image Analysis'
+description: 'Uma aplicação para reconhecimento de imagens'
 layout: Doc
 framework: v2
 platform: AWS
 language: nodeJS
 priority: 1
-authorLink: 'https://github.com/serverless'
-authorName: 'Serverless, inc.'
-authorAvatar: 'https://avatars1.githubusercontent.com/u/13742415?s=200&v=4'
+authorLink: 'https://github.com/rafaelportomoura'
+authorName: 'Rafael Moura'
 -->
 
+# Image Analysis
 
-# Serverless Framework AWS NodeJS Example
-
-This template demonstrates how to deploy a NodeJS function running on AWS Lambda using the traditional Serverless Framework. The deployed function does not include any event definitions as well as any kind of persistence (database). For more advanced configurations check out the [examples repo](https://github.com/serverless/examples/) which includes integrations with SQS, DynamoDB or examples of functions that are triggered in `cron`-like manner. For details about configuration of specific `events`, please refer to our [documentation](https://www.serverless.com/framework/docs/providers/aws/events/).
+Uma aplicação para reconhecimento de imagens
 
 ## Usage
 
 ### Deployment
 
-In order to deploy the example, you need to run the following command:
+Para implantar o exemplo, você precisa executar o seguinte comando:
 
-```
-$ serverless deploy
+```bash
+serverless deploy
 ```
 
-After running deploy, you should see output similar to:
+Depois de executar a implantação, você deve ver a saída semelhante a:
 
 ```bash
 Serverless: Packaging service...
@@ -57,34 +55,34 @@ layers:
 
 ### Invocation
 
-After successful deployment, you can invoke the deployed function by using the following command:
+Após a implantação bem-sucedida, você pode invocar a função implantada usando o seguinte comando:
 
 ```bash
-serverless invoke --function hello
+serverless invoke --function img-analysis --path request.json
 ```
 
-Which should result in response similar to the following:
+Que deve resultar em resposta semelhante ao seguinte:
 
 ```json
 {
     "statusCode": 200,
-    "body": "{\n  \"message\": \"Go Serverless v2.0! Your function executed successfully!\",\n  \"input\": {}\n}"
+    "body": "{\n  \"message\": \"Imagem: ${imageUrl}\n\nA imagem tem:\n${text}\",\n  \"input\": {}\n}"
 }
 ```
 
 ### Local development
 
-You can invoke your function locally by using the following command:
+Você pode invocar sua função localmente usando o seguinte comando:
 
 ```bash
-serverless invoke local --function hello
+serverless invoke local -f img-analysis --path request.json
 ```
 
-Which should result in response similar to the following:
+Que deve resultar em resposta semelhante ao seguinte:
 
-```
+```json
 {
     "statusCode": 200,
-    "body": "{\n  \"message\": \"Go Serverless v2.0! Your function executed successfully!\",\n  \"input\": \"\"\n}"
+    "body": "{\n  \"message\": \"Imagem: ${imageUrl}\n\nA imagem tem:\n${text}\",\n  \"input\": {}\n}"
 }
 ```
